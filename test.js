@@ -16,3 +16,8 @@ test('emoji to shortcodes', function (t) {
   t.is(e.toShortCode('🏴󠁧󠁢󠁷󠁬󠁳󠁿'), 'flag_gbwls')
   t.is(e.toShortCode('not-an-emoji'), '')
 })
+
+test('emojis over text', function (t) {
+  t.is(e.toEmoji('heart'), '❤️')
+  t.is(e.toShortCode('❤️'), 'heart')
+})
