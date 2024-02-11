@@ -85,7 +85,8 @@ const INDEX = Buffer.concat([
 
 let s = `// https://emojibase.dev version ${version}\n\n`
 
-s += 'const b4a = require(\'b4a\')\n\n'
+s += 'const b4a = require(\'b4a\')\n'
+s += 'const { hostToLE16, hostToLE32 } = require(\'convert-endianness\')\n\n'
 s += `const INDEX = b4a.from('${INDEX.toString('base64')}', 'base64')\n\n`
 
 let n = 0
@@ -96,10 +97,14 @@ s += `exports.POINTS_TO_KEY = to16(${n}, ${n += POINTS_TO_KEY.byteLength})\n`
 s += `exports.KEYS = INDEX.subarray(${n}, ${n += KEYS.byteLength})\n`
 s += '\n'
 s += `function to16 (offset, end) {
-  return new Uint16Array(INDEX.buffer, offset, (end - offset) / 2)
+  const arr = new Uint16Array(INDEX.buffer, offset, (end - offset) / 2)
+  hostToLE16(arr)
+  return arr
 }\n\n`
 s += `function to32 (offset, end) {
-  return new Uint32Array(INDEX.buffer, offset, (end - offset) / 4)
+  const arr = new Uint32Array(INDEX.buffer, offset, (end - offset) / 4)
+  hostToLE32(arr)
+  return arr
 }\n`
 
 console.log('Wrote raw-index to', out)

@@ -8,13 +8,14 @@
     "raw-index.js"
   ],
   "dependencies": {
-    "b4a": "^1.6.6"
+    "b4a": "^1.6.6",
+    "convert-endianness": "^1.0.0"
   },
   "devDependencies": {
     "brittle": "^3.4.0",
     "node-fetch": "^3.3.2",
-    "url-file-url": "^1.0.1",
-    "standard": "^17.1.0"
+    "standard": "^17.1.0",
+    "url-file-url": "^1.0.1"
   },
   "scripts": {
     "test": "standard && brittle test.js",
