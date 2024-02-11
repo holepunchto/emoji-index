@@ -21,9 +21,17 @@ for (const emoji of data) {
   if (!emoji.shortCodes.length) continue
 
   const offset = points.length
-  for (const part of emoji.hexcode.split('-')) {
-    points.push(parseInt(part, 16))
+
+  if (emoji.type === 0) { // prefer the "emojis" always over text ones
+    for (const code of toCodepoints(emoji.emoji)) {
+      points.push(code)
+    }
+  } else {
+    for (const part of emoji.hexcode.split('-')) {
+      points.push(parseInt(part, 16))
+    }
   }
+
   const count = points.length - offset
 
   let first = true
@@ -125,4 +133,15 @@ function addShortCodes (data, shortCodes) {
 async function fetchJson (url) {
   const response = await fetch(url)
   return await response.json()
+}
+
+function toCodepoints (emoji) {
+  const chars = [...emoji]
+  const codes = new Array(chars.length)
+
+  for (let i = 0; i < codes.length; i++) {
+    codes[i] = chars[i].codePointAt(0)
+  }
+
+  return codes
 }
