@@ -1,4 +1,4 @@
-exports.customEmojis = [
+module.exports = [
   {
     label: 'Keet Laughs',
     tags: ['keet', 'laugh'],
