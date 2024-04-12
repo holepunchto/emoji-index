@@ -1,7 +1,7 @@
 import fs from 'fs'
 import fetch from 'node-fetch'
 import { fileURLToPath } from 'url-file-url'
-import { customEmojis } from '../data/raw-emojis-custom.js'
+import customEmojis from '../data/raw-emojis-custom.js'
 
 const out = fileURLToPath(new URL('../raw-index.js', import.meta.url))
 const cdnUrl = 'https://cdn.jsdelivr.net/npm/emojibase-data'
