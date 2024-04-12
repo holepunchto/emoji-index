@@ -1,6 +1,7 @@
 import fs from 'fs'
 import fetch from 'node-fetch'
 import { fileURLToPath } from 'url-file-url'
+import { customEmojis } from '../data/raw-emojis-custom.js'
 
 const out = fileURLToPath(new URL('../raw-index.js', import.meta.url))
 const cdnUrl = 'https://cdn.jsdelivr.net/npm/emojibase-data'
@@ -10,6 +11,14 @@ const data = await fetchJson(`${cdnUrl}@${version}/en/data.json`)
 const shortCodes = await fetchJson(`${cdnUrl}@${version}/en/shortcodes/emojibase.json`)
 
 addShortCodes(data, shortCodes)
+
+customEmojis.forEach(({ alt, shortCodes }) => {
+  data.push({
+    emoji: alt,
+    shortCodes,
+    type: 0
+  })
+})
 
 let keys = ''
 
