@@ -33,8 +33,8 @@ test('custom shortcodes to emojis', function (t) {
   t.is(e.toEmoji('holepunch'), '🕳️🥊')
 
   t.is(e.toShortCode('😂'), 'joy')
-  t.is(e.toShortCode('🥳'), 'keet_party') // should be 'hooray'
-  t.is(e.toShortCode('😍'), 'keet_love') // should be 'heart_eyes'
+  t.is(e.toShortCode('🥳'), 'hooray')
+  t.is(e.toShortCode('😍'), 'heart_eyes')
   t.is(e.toShortCode('😌'), 'relieved')
   t.is(e.toShortCode('🎶'), 'musical_notes')
   t.is(e.toShortCode('bitcoin'), 'bitcoin')
