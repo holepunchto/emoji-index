@@ -12,14 +12,18 @@
     "convert-endianness": "^1.0.0"
   },
   "devDependencies": {
-    "brittle": "^3.4.0",
+    "brittle": "^4.1.0",
+    "lunte": "^1.8.4",
     "node-fetch": "^3.3.2",
-    "standard": "^17.1.0",
+    "prettier": "^3.9.6",
+    "prettier-config-holepunch": "^2.0.0",
     "url-file-url": "^1.0.1"
   },
   "scripts": {
-    "test": "standard && brittle test.js",
-    "generate": "node scripts/generate.mjs"
+    "format": "prettier --write . && lunte --fix",
+    "generate": "node scripts/generate.mjs",
+    "lint": "prettier --check . && lunte",
+    "test": "brittle-bare --coverage test.js"
   },
   "repository": {
     "type": "git",
