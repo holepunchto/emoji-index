@@ -97,12 +97,12 @@ s += `exports.KEY_TO_POINTS = to16(${n}, ${(n += KEY_TO_POINTS.byteLength)})\n`
 s += `exports.POINTS_TO_KEY = to16(${n}, ${(n += POINTS_TO_KEY.byteLength)})\n`
 s += `exports.KEYS = INDEX.subarray(${n}, ${(n += KEYS.byteLength)})\n`
 s += '\n'
-s += `function to16 (offset, end) {
+s += `function to16(offset, end) {
   const arr = new Uint16Array(INDEX.buffer, offset, (end - offset) / 2)
   hostToLE16(arr)
   return arr
 }\n\n`
-s += `function to32 (offset, end) {
+s += `function to32(offset, end) {
   const arr = new Uint32Array(INDEX.buffer, offset, (end - offset) / 4)
   hostToLE32(arr)
   return arr
