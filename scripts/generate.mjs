@@ -22,7 +22,8 @@ for (const emoji of data) {
 
   const offset = points.length
 
-  if (emoji.type === 0) { // prefer the "emojis" always over text ones
+  if (emoji.type === 0) {
+    // prefer the "emojis" always over text ones
     for (const code of toCodepoints(emoji.emoji)) {
       points.push(code)
     }
@@ -51,7 +52,7 @@ for (const emoji of data) {
   }
 }
 
-codes.sort((a, b) => a.key < b.key ? -1 : a.key > b.key ? 1 : 0)
+codes.sort((a, b) => (a.key < b.key ? -1 : a.key > b.key ? 1 : 0))
 reverse.sort((a, b) => cmpCodePoints(toPoint(a.point), toPoint(b.point)))
 
 const KEYS = Buffer.from(keys)
@@ -85,16 +86,16 @@ const INDEX = Buffer.concat([
 
 let s = `// https://emojibase.dev version ${version}\n\n`
 
-s += 'const b4a = require(\'b4a\')\n'
-s += 'const { hostToLE16, hostToLE32 } = require(\'convert-endianness\')\n\n'
+s += "const b4a = require('b4a')\n"
+s += "const { hostToLE16, hostToLE32 } = require('convert-endianness')\n\n"
 s += `const INDEX = b4a.from('${INDEX.toString('base64')}', 'base64')\n\n`
 
 let n = 0
 
-s += `exports.POINTS = to32(${n}, ${n += POINTS.byteLength})\n`
-s += `exports.KEY_TO_POINTS = to16(${n}, ${n += KEY_TO_POINTS.byteLength})\n`
-s += `exports.POINTS_TO_KEY = to16(${n}, ${n += POINTS_TO_KEY.byteLength})\n`
-s += `exports.KEYS = INDEX.subarray(${n}, ${n += KEYS.byteLength})\n`
+s += `exports.POINTS = to32(${n}, ${(n += POINTS.byteLength)})\n`
+s += `exports.KEY_TO_POINTS = to16(${n}, ${(n += KEY_TO_POINTS.byteLength)})\n`
+s += `exports.POINTS_TO_KEY = to16(${n}, ${(n += POINTS_TO_KEY.byteLength)})\n`
+s += `exports.KEYS = INDEX.subarray(${n}, ${(n += KEYS.byteLength)})\n`
 s += '\n'
 s += `function to16 (offset, end) {
   const arr = new Uint16Array(INDEX.buffer, offset, (end - offset) / 2)
@@ -110,7 +111,7 @@ s += `function to32 (offset, end) {
 console.log('Wrote raw-index to', out)
 fs.writeFileSync(out, s)
 
-function cmpCodePoints (a, b) {
+function cmpCodePoints(a, b) {
   if (a.length !== b.length) return a.length - b.length
   for (let i = 0; i < a.length; i++) {
     if (a[i] !== b[i]) return a[i] - b[i]
@@ -118,13 +119,13 @@ function cmpCodePoints (a, b) {
   return 0
 }
 
-function toPoint (ptr) {
+function toPoint(ptr) {
   const p = new Array(ptr[1])
   for (let i = 0; i < p.length; i++) p[i] = points[ptr[0] + i]
   return p
 }
 
-function addShortCodes (data, shortCodes) {
+function addShortCodes(data, shortCodes) {
   for (const emoji of data) {
     emoji.shortCodes = Array.isArray(shortCodes[emoji.hexcode])
       ? shortCodes[emoji.hexcode]
@@ -135,12 +136,12 @@ function addShortCodes (data, shortCodes) {
   }
 }
 
-async function fetchJson (url) {
+async function fetchJson(url) {
   const response = await fetch(url)
   return await response.json()
 }
 
-function toCodepoints (emoji) {
+function toCodepoints(emoji) {
   const chars = [...emoji]
   const codes = new Array(chars.length)
 
