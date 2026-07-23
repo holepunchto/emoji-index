@@ -1,7 +1,7 @@
 const b4a = require('b4a')
 const { KEYS, POINTS, KEY_TO_POINTS, POINTS_TO_KEY } = require('./raw-index.js')
 
-exports.toEmoji = function toEmoji (shortCode) {
+exports.toEmoji = function toEmoji(shortCode) {
   const shortCodeBuffer = b4a.from(shortCode)
 
   let start = 0
@@ -38,7 +38,7 @@ exports.toEmoji = function toEmoji (shortCode) {
   return ''
 }
 
-exports.toShortCode = function toShortCode (emoji) {
+exports.toShortCode = function toShortCode(emoji) {
   const codes = exports.toCodePoints(emoji)
 
   let start = 0
@@ -87,7 +87,7 @@ exports.toCodePoints = function (emoji) {
   return codes
 }
 
-function getCodePoint (offset, length) {
+function getCodePoint(offset, length) {
   const codes = new Array(length)
 
   for (let i = 0; i < codes.length; i++) {
@@ -97,7 +97,7 @@ function getCodePoint (offset, length) {
   return codes
 }
 
-function cmpCodePoints (a, b) {
+function cmpCodePoints(a, b) {
   if (a.length !== b.length) return a.length - b.length
   for (let i = 0; i < a.length; i++) {
     if (a[i] !== b[i]) return a[i] - b[i]

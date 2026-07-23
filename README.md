@@ -10,7 +10,7 @@ Is just ~75kb in size and consumes only ~60kb on memory when running.
 
 ## Usage
 
-``` js
+```js
 const e = require('emoji-index')
 
 console.log(e.toEmoji('neutral')) // prints 😐
